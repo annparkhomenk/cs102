@@ -1,8 +1,5 @@
 def get_greeting(name: str) -> str:
-    if name == "World":
-        return "Hello, World!"
-    elif name == "Anonymous":
-        return "Hello, Anonymous!"
+    return f"Hello, {name}!"
 
 
 if __name__ == "__main__":
