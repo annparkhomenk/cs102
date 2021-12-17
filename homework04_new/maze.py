@@ -1,7 +1,7 @@
+import pandas as pd
+
 from random import choice, randint
 from typing import List, Optional, Tuple, Union
-
-import pandas as pd
 
 
 def create_grid(rows: int = 15, cols: int = 15) -> List[List[Union[str, int]]]:
@@ -139,18 +139,22 @@ def shortest_path(
             if grid[x + 1][y] == k - 1:
                 x += 1
                 k -= 1
+                continue
         if x > 0:
             if grid[x - 1][y] == k - 1:
                 x -= 1
                 k -= 1
+                continue
         if y < cols - 1:
             if grid[x][y + 1] == k - 1:
                 y += 1
                 k -= 1
+                continue
         if y > 0:
             if grid[x][y - 1] == k - 1:
                 y -= 1
                 k -= 1
+                continue
     path.append((x, y))
     return path
 
