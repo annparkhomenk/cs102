@@ -49,8 +49,8 @@ class GameOfLife:
     def get_next_generation(self) -> Grid:
         # Copy from previous assignment
         new_grid = self.create_grid()
-        for i in range(self.rows):
-            for j in range(self.cols):
+        for i in range(self.cols):
+            for j in range(self.rows):
                 neighbours = self.get_neighbours((i, j))
                 if self.curr_generation[i][j] == 0:
                     if sum(neighbours) == 3:
