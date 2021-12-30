@@ -83,7 +83,10 @@ class GameOfLife:
         if not randomize:
             return [[0 for i in range(self.cell_width)] for j in range(self.cell_height)]
         else:
-            return [[random.randint(0, 1) for i in range(self.cell_width)] for j in range(self.cell_height)]
+            return [
+                [random.randint(0, 1) for i in range(self.cell_width)]
+                for j in range(self.cell_height)
+            ]
 
     def draw_grid(self) -> None:
         """
@@ -92,11 +95,17 @@ class GameOfLife:
         for i in range(self.cell_height):
             for j in range(self.cell_width):
                 if self.grid[i][j] == 0:
-                    pygame.draw.rect(self.screen, pygame.Color('white'), (j * self.cell_size, i * self.cell_size,
-                                                                          self.cell_size, self.cell_size))
+                    pygame.draw.rect(
+                        self.screen,
+                        pygame.Color('white'),
+                        (j * self.cell_size, i * self.cell_size, self.cell_size, self.cell_size),
+                    )
                 else:
-                    pygame.draw.rect(self.screen, pygame.Color('green'), (j * self.cell_size, i * self.cell_size,
-                                                                          self.cell_size, self.cell_size))
+                    pygame.draw.rect(
+                        self.screen,
+                        pygame.Color('green'),
+                        (j * self.cell_size, i * self.cell_size, self.cell_size, self.cell_size),
+                    )
 
     def get_neighbours(self, cell: Cell) -> Cells:
         """
