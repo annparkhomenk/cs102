@@ -17,4 +17,4 @@ class GUI(UI):
 
     def run(self) -> None:
         # Copy from previous assignment
-          pass
+        pass
