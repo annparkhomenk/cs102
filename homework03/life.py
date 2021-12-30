@@ -78,7 +78,10 @@ class GameOfLife:
         """
         Не превысило ли текущее число поколений максимально допустимое.
         """
-        return self.generations > self.max_generations
+        if self.max_generations and self.max_generations != float("inf"):
+            return self.generations > self.max_generations
+        else:
+            return False
 
     @property
     def is_changing(self) -> bool:
@@ -95,7 +98,7 @@ class GameOfLife:
         f = open(f"{filename}").readlines()
         grid = []
         for line in f:
-            grid += list(map(int, list(line)))
+            grid.append(list(map(int, list(line))))
         life = GameOfLife((len(grid), len(grid[0])))
         life.curr_generation = grid
         return life
