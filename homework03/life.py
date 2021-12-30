@@ -92,7 +92,7 @@ class GameOfLife:
         """
         Прочитать состояние клеток из указанного файла.
         """
-        f = open(f'{filename}').readlines()
+        f = open(f"{filename}").readlines()
         grid = []
         for line in f:
             grid += list(map(int, list(line)))
@@ -104,8 +104,8 @@ class GameOfLife:
         """
         Сохранить текущее состояние клеток в указанный файл.
         """
-        f = open(f'{filename}', 'w')
+        f = open(f"{filename}", "w")
         for line in self.curr_generation:
-            f.write(''.join(list(map(str, line))))
-            f.write('\n')
+            f.write("".join(list(map(str, line))))
+            f.write("\n")
         f.close()
