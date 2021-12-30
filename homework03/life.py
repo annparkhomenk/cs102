@@ -48,7 +48,7 @@ class GameOfLife:
 
     def get_next_generation(self) -> Grid:
         # Copy from previous assignment
-        new_grid = [[0 for i in range(self.rows)] for j in range(self.cols)]
+        new_grid = self.create_grid()
         for i in range(self.rows):
             for j in range(self.cols):
                 neighbours = self.get_neighbours((i, j))
@@ -68,10 +68,9 @@ class GameOfLife:
         """
         Выполнить один шаг игры.
         """
-        if not self.is_max_generations_exceeded and self.is_changing:
-            self.prev_generation = self.curr_generation
-            self.curr_generation = self.get_next_generation()
-            self.generations += 1
+        self.prev_generation = self.curr_generation
+        self.curr_generation = self.get_next_generation()
+        self.generations += 1
 
     @property
     def is_max_generations_exceeded(self) -> bool:
@@ -88,7 +87,7 @@ class GameOfLife:
         """
         Изменилось ли состояние клеток с предыдущего шага.
         """
-        return self.prev_generation == self.curr_generation
+        return self.prev_generation != self.curr_generation
 
     @staticmethod
     def from_file(filename: pathlib.Path) -> "GameOfLife":
