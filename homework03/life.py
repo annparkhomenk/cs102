@@ -41,7 +41,7 @@ class GameOfLife:
         neighs = []
         for i in range(x - 1, x + 2):
             for j in range(y - 1, y + 2):
-                if 0 <= i < self.rows and 0 <= j < self.cols:
+                if 0 <= i < self.cols and 0 <= j < self.rows:
                     neighs.append(self.curr_generation[i][j])
         neighs.remove(self.curr_generation[x][y])
         return neighs
