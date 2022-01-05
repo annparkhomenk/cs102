@@ -18,7 +18,7 @@ def remove_wall(
     :return:
     """
 
-    x, y = coord[0], coord[1]
+    x, y = coord
     rows, cols = len(grid), len(grid[0])
     if x < rows - 2:
         if y < cols - 2:
@@ -55,7 +55,7 @@ def bin_tree_maze(
                 empty_cells.append((x, y))
 
     for cell in empty_cells:
-        remove_wall(grid, (cell[0], cell[1]))
+        remove_wall(grid, cell)
 
     # 1. выбрать любую клетку
     # 2. выбрать направление: наверх или направо.
@@ -164,16 +164,17 @@ def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) ->
     :return:
     """
     x, y = coord
+    rows, cols = len(grid), len(grid[0])
 
-    if x % 14 == 0 and y % 14 == 0:
+    if x % (rows - 1) == 0 and y % (cols - 1) == 0:
         return True
     if x == 0 and grid[x + 1][y] != " ":
         return True
-    if x == 14 and grid[x - 1][y] != " ":
+    if x == (rows - 1) and grid[x - 1][y] != " ":
         return True
     if y == 0 and grid[x][y + 1] != " ":
         return True
-    if y == 14 and grid[x][y - 1] != " ":
+    if y == (cols - 1) and grid[x][y - 1] != " ":
         return True
 
     return False
