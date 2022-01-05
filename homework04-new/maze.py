@@ -20,15 +20,15 @@ def remove_wall(
 
     x, y = coord
     rows, cols = len(grid), len(grid[0])
-    if x < rows - 2:
+    if x > 1:
         if y < cols - 2:
-            dir = choice([0, 1])
-            if dir == 0:
+            direction = choice([0, 1])
+            if direction == 0:
                 grid[x][y + 1] = " "
             else:
-                grid[x + 1][y] = " "
+                grid[x - 1][y] = " "
         else:
-            grid[x + 1][y] = " "
+            grid[x - 1][y] = " "
     else:
         if y < cols - 2:
             grid[x][y + 1] = " "
@@ -187,12 +187,12 @@ def solve_maze(
     :param grid:
     :return:
     """
-    exes = get_exits(grid)
-    start_x, start_y = exes[0]
-    exit_x, exit_y = exes[1]
-
-    if (start_x, start_y) == (exit_x, exit_y):
-        return grid, (start_x, start_y)
+    exits = get_exits(grid)
+    if len(exits) == 1:
+        return grid, exits[0]
+    else:
+        start_x, start_y = exits[0]
+        exit_x, exit_y = exits[1]
 
     if encircled_exit(grid, (exit_x, exit_y)):
         return grid, None
