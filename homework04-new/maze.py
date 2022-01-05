@@ -17,12 +17,11 @@ def remove_wall(
     :param coord:
     :return:
     """
-
     x, y = coord
-    rows, cols = len(grid), len(grid[0])
-    if x > 1:
-        if y < cols - 2:
-            direction = choice(["up", "right"])
+    cols = len(grid[0])
+    direction = choice(["up", "right"])
+    if x != 1:
+        if y != cols - 2:
             if direction == "right":
                 grid[x][y + 1] = " "
             else:
@@ -30,7 +29,7 @@ def remove_wall(
         else:
             grid[x - 1][y] = " "
     else:
-        if y < cols - 2:
+        if y != cols - 2:
             grid[x][y + 1] = " "
 
     return grid
@@ -83,12 +82,10 @@ def get_exits(grid: List[List[Union[str, int]]]) -> List[Tuple[int, int]]:
     :param grid:
     :return:
     """
-    exits = []
-    for i, line in enumerate(grid):
-        for j, cell in enumerate(line):
-            if cell == "X":
-                exits.append((i, j))
-    return exits
+    return [
+        (i, j) for i in range(len(grid))
+        for j in range(len(grid[0])) if grid[i][j] == "X"
+    ]
 
 
 def make_step(grid: List[List[Union[str, int]]], k: int) -> List[List[Union[str, int]]]:
@@ -194,10 +191,7 @@ def solve_maze(
         start_x, start_y = exits[0]
         exit_x, exit_y = exits[1]
 
-    if encircled_exit(grid, (exit_x, exit_y)):
-        return grid, None
-
-    if encircled_exit(grid, (start_x, start_y)):
+    if encircled_exit(grid, (exit_x, exit_y)) or encircled_exit(grid, (start_x, start_y)):
         return grid, None
 
     grid[start_x][start_y] = 1
