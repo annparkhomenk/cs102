@@ -129,7 +129,7 @@ def shortest_path(
     path = []
     rows, cols = len(grid), len(grid[0])
     x, y = exit_coord[0], exit_coord[1]
-    k = grid[x][y]
+    k = int(grid[x][y])
     while k != 1:
         path.append((x, y))
         if x < rows - 1:
@@ -237,6 +237,5 @@ if __name__ == "__main__":
     GRID = bin_tree_maze(15, 15)
     print(pd.DataFrame(GRID))
     _, PATH = solve_maze(GRID)
-    print(PATH)
     MAZE = add_path_to_grid(GRID, PATH)
     print(pd.DataFrame(MAZE))
