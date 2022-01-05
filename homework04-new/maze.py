@@ -22,8 +22,8 @@ def remove_wall(
     rows, cols = len(grid), len(grid[0])
     if x > 1:
         if y < cols - 2:
-            direction = choice([0, 1])
-            if direction == 0:
+            direction = choice(["up", "right"])
+            if direction == "right":
                 grid[x][y + 1] = " "
             else:
                 grid[x - 1][y] = " "
