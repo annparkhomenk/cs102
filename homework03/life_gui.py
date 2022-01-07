@@ -50,12 +50,12 @@ class GUI(UI):
         clock = pygame.time.Clock()
         while paused:
             for event in pygame.event.get():
-                if event.type == KEYDOWN:
-                    if event.key == K_c:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_c:
                         paused = False
-                elif event.type == MOUSEBUTTONDOWN:
+                elif event.type == pygame.MOUSEBUTTONDOWN:
                     self.life.curr_generation = self.get_click(event.pos)
-                elif event.type == QUIT:
+                elif event.type == pygame.QUIT:
                     pygame.quit()
             self.draw_grid()
             self.draw_lines()
@@ -78,10 +78,10 @@ class GUI(UI):
         running = True
         while running:
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.QUIT:
                     running = False
-                elif event.type == KEYDOWN:
-                    if event.key == K_p:
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_p:
                         self.pause()
 
             self.draw_grid()
