@@ -31,9 +31,9 @@ class GameOfLife:
     def create_grid(self, randomize: bool = False) -> Grid:
         # Copy from previous assignment
         if not randomize:
-            return [[0 for j in range(self.cols)] for i in range(self.rows)]
+            return [[0 for i in range(self.cols)] for j in range(self.rows)]
         else:
-            return [[random.randint(0, 1) for j in range(self.cols)] for i in range(self.rows)]
+            return [[random.randint(0, 1) for i in range(self.cols)] for j in range(self.rows)]
 
     def get_neighbours(self, cell: Cell) -> Cells:
         # Copy from previous assignment
@@ -42,15 +42,15 @@ class GameOfLife:
         for i in range(x - 1, x + 2):
             for j in range(y - 1, y + 2):
                 if 0 <= i < self.rows and 0 <= j < self.cols:
-                    neighs.append(self.curr_generation[i][j])
-        neighs.remove(self.curr_generation[x][y])
+                    if x != i or y != j:
+                        neighs.append(self.curr_generation[i][j])
         return neighs
 
     def get_next_generation(self) -> Grid:
         # Copy from previous assignment
         new_grid = self.create_grid()
-        for i in range(self.cols):
-            for j in range(self.rows):
+        for i in range(self.rows):
+            for j in range(self.cols):
                 neighbours = self.get_neighbours((i, j))
                 if self.curr_generation[i][j] == 0:
                     if sum(neighbours) == 3:
