@@ -31,9 +31,9 @@ class GameOfLife:
     def create_grid(self, randomize: bool = False) -> Grid:
         # Copy from previous assignment
         if not randomize:
-            return [[0 for i in range(self.rows)] for j in range(self.cols)]
+            return [[0 for j in range(self.cols)] for i in range(self.rows)]
         else:
-            return [[random.randint(0, 1) for i in range(self.rows)] for j in range(self.cols)]
+            return [[random.randint(0, 1) for j in range(self.cols)] for i in range(self.rows)]
 
     def get_neighbours(self, cell: Cell) -> Cells:
         # Copy from previous assignment
@@ -68,9 +68,10 @@ class GameOfLife:
         """
         Выполнить один шаг игры.
         """
-        self.prev_generation = self.curr_generation
-        self.curr_generation = self.get_next_generation()
-        self.generations += 1
+        if not self.is_max_generations_exceeded and self.is_changing:
+            self.prev_generation = self.curr_generation
+            self.curr_generation = self.get_next_generation()
+            self.generations += 1
 
     @property
     def is_max_generations_exceeded(self) -> bool:
